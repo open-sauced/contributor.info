@@ -29,7 +29,7 @@ const useContributorData = () => {
     if (error) {
       return {
         type: "error",
-        error: error,
+        error: error
       };
     }
 
@@ -37,7 +37,7 @@ const useContributorData = () => {
       type: "result",
       data: data?.data ?? [],
       meta: data?.meta ?? { itemCount: 0 },
-      mutate,
+      mutate
     };
   }, []);
 };

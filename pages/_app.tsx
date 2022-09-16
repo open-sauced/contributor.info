@@ -1,5 +1,5 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { SWRConfig } from "swr";
@@ -29,4 +29,4 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-export default App
+export default App;

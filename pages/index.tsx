@@ -13,7 +13,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
+        <h1 className="bg-gradient-to-r from-gradFirst via-gradMiddle to-gradLast bg-clip-text text-transparent">
           Contributor Info
         </h1>
 

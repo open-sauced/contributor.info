@@ -18,7 +18,7 @@ const Home: NextPage = () => {
         </h1>
 
         <p className={styles.description}>
-          Discover who's contributing to Open-Source projects!
+          Discover contributors to open-source projects!
         </p>
 
         <div className={styles.grid}>

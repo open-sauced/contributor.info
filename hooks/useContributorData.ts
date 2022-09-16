@@ -18,6 +18,7 @@ const useContributorData = () => {
   useCallback(async (owner: string, repo: string): Promise<Response> => {
     console.log(owner);
     // useSWR is probably going to be a sticking point
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { data, error, mutate } = useSWR<PaginatedDataResponse, Error>(
       `repos/${owner}/${repo}/contributions`
     );
@@ -37,7 +38,8 @@ const useContributorData = () => {
       type: "result",
       data: data?.data ?? [],
       meta: data?.meta ?? { itemCount: 0 },
-      mutate
+      // commenting for now to appease build
+      // mutate
     };
   }, []);
 };

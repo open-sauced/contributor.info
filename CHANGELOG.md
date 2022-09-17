@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+### [1.0.1-beta.1](https://github.com/open-sauced/contributor.info/compare/v1.0.0...v1.0.1-beta.1) (2022-09-17)
+
+
+### 🧑‍💻 Code Refactoring
+
+* improve redirect not found page and route ([#8](https://github.com/open-sauced/contributor.info/issues/8)) ([9da5e11](https://github.com/open-sauced/contributor.info/commit/9da5e116296848175c7b74b0384cc2dab27fdcc2)), closes [#3](https://github.com/open-sauced/contributor.info/issues/3)
+
 ## 1.0.0 (2022-09-16)
 
 

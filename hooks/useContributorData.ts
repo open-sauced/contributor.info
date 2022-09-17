@@ -37,7 +37,7 @@ const useContributorData = () => {
     return {
       type: "result",
       data: data?.data ?? [],
-      meta: data?.meta ?? { itemCount: 0 },
+      meta: data?.meta ?? { itemCount: 0 }
       // commenting for now to appease build
       // mutate
     };

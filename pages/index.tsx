@@ -11,10 +11,18 @@ const Home: NextPage = () => {
 
   const router = useRouter();
   const handleSubmit = (event) => {
-
     router.push(searchBoxRef.current.value);
     event.preventDefault();
   };
+
+  const handleLuck = (event) => {
+    const randomRepo = Math.floor(Math.random() * 100)
+
+    // fetch top 100 repos and pass int
+    router.push(searchBoxRef.current.value);
+    event.preventDefault();
+  };
+
 
   useKeys(["Enter"], handleSubmit, { target: searchBoxRef });
 

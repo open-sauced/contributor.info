@@ -4,6 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useRouter } from 'next/router'
+import { useKeys } from "rooks";
 
 const Home: NextPage = () => {
   const searchBoxRef = useRef(null);
@@ -11,9 +12,11 @@ const Home: NextPage = () => {
   const router = useRouter();
   const handleSubmit = (event) => {
 
-    router.push(searchBoxRef.current.value)
+    router.push(searchBoxRef.current.value);
     event.preventDefault();
   };
+
+  useKeys(["Enter"], handleSubmit, { target: searchBoxRef });
 
   return (
     <div className={styles.container}>

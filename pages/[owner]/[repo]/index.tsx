@@ -39,7 +39,6 @@ const OwnerRepo = () => {
   // Keep track of our assumptions about data types coming from `router`
   const owner = router.query["owner"] as string;
   const repo = router.query["repo"] as string;
-  console.log(router.query);
 
   if (owner && repo) {
     return <ChildWithSWR owner={owner} repo={repo} />;

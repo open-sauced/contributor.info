@@ -7,19 +7,19 @@ import { useRouter } from "next/router";
 import { useKeys } from "rooks";
 
 const Home: NextPage = () => {
-  const searchBoxRef = useRef(null);
+  const searchBoxRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
-  const handleSubmit = (event) => {
-    router.push(searchBoxRef.current.value);
+  const handleSubmit = (event: KeyboardEvent) => {
+    searchBoxRef.current && router.push(searchBoxRef.current.value);
     event.preventDefault();
   };
 
-  const handleLuck = (event) => {
+  const handleLuck = (event: KeyboardEvent) => {
     const randomRepo = Math.floor(Math.random() * 100);
 
     // fetch top 100 repos and pass int
-    router.push(searchBoxRef.current.value);
+    searchBoxRef.current && router.push(searchBoxRef.current.value);
     event.preventDefault();
   };
 

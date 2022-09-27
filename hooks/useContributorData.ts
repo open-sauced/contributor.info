@@ -16,7 +16,6 @@ type Response =
 // this needs useCallback wrap if we want to use it in the other component
 const useContributorData = () => {
   useCallback(async (owner: string, repo: string): Promise<Response> => {
-    console.log(owner);
     // useSWR is probably going to be a sticking point
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const { data, error, mutate } = useSWR<PaginatedDataResponse, Error>(

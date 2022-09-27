@@ -5,6 +5,18 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.1.0](https://github.com/open-sauced/contributor.info/compare/v1.0.0...v1.1.0) (2022-09-27)
+
+
+### 🧑‍💻 Code Refactoring
+
+* improve redirect not found page and route ([#8](https://github.com/open-sauced/contributor.info/issues/8)) ([9da5e11](https://github.com/open-sauced/contributor.info/commit/9da5e116296848175c7b74b0384cc2dab27fdcc2)), closes [#3](https://github.com/open-sauced/contributor.info/issues/3)
+
+
+### 🍕 Features
+
+* Adds working search to home page ([#11](https://github.com/open-sauced/contributor.info/issues/11)) ([f88bf74](https://github.com/open-sauced/contributor.info/commit/f88bf749c66d077c516617fa2b2db7fa1d9bef7b)), closes [#4](https://github.com/open-sauced/contributor.info/issues/4)
+
 ## [1.1.0-beta.1](https://github.com/open-sauced/contributor.info/compare/v1.0.1-beta.1...v1.1.0-beta.1) (2022-09-27)
 
 

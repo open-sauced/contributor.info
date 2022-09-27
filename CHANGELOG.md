@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.1.0-beta.1](https://github.com/open-sauced/contributor.info/compare/v1.0.1-beta.1...v1.1.0-beta.1) (2022-09-27)
+
+
+### 🍕 Features
+
+* Adds working search to home page ([#11](https://github.com/open-sauced/contributor.info/issues/11)) ([f88bf74](https://github.com/open-sauced/contributor.info/commit/f88bf749c66d077c516617fa2b2db7fa1d9bef7b)), closes [#4](https://github.com/open-sauced/contributor.info/issues/4)
+
 ### [1.0.1-beta.1](https://github.com/open-sauced/contributor.info/compare/v1.0.0...v1.0.1-beta.1) (2022-09-17)
 
 

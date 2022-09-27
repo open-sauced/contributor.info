@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
@@ -10,18 +10,18 @@ const Home: NextPage = () => {
   const searchBoxRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
-  const handleSubmit = (event: KeyboardEvent) => {
+  const handleSubmit = (event: KeyboardEvent | React.MouseEvent): void => {
     searchBoxRef.current && router.push(searchBoxRef.current.value);
     event.preventDefault();
   };
 
-  const handleLuck = (event: KeyboardEvent) => {
-    const randomRepo = Math.floor(Math.random() * 100);
+  // const handleLuck = (React.MouseEvent) => {
+  //   const randomRepo = Math.floor(Math.random() * 100);
 
-    // fetch top 100 repos and pass int
-    searchBoxRef.current && router.push(searchBoxRef.current.value);
-    event.preventDefault();
-  };
+  //   // fetch top 100 repos and pass int
+  //   searchBoxRef.current && router.push(searchBoxRef.current.value);
+  //   event.preventDefault();
+  // };
 
 
   useKeys(["Enter"], handleSubmit, { target: searchBoxRef });

@@ -3,7 +3,7 @@ import { useRef } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import { useKeys } from "rooks";
 
 const Home: NextPage = () => {
@@ -16,7 +16,7 @@ const Home: NextPage = () => {
   };
 
   const handleLuck = (event) => {
-    const randomRepo = Math.floor(Math.random() * 100)
+    const randomRepo = Math.floor(Math.random() * 100);
 
     // fetch top 100 repos and pass int
     router.push(searchBoxRef.current.value);
@@ -48,7 +48,6 @@ const Home: NextPage = () => {
                 type="text"
                 className="bg-white w-full outline-none text-base text-lightSlate"
                 placeholder="Search repositories"
-                type="text"
               />
             </div>
 

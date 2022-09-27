@@ -56,10 +56,10 @@ const Home: NextPage = () => {
               <button onClick={(e) => handleSubmit(e)} type="submit" className="mr-2 bui-btn sbui-btn-primary sbui-btn-container--shadow sbui-btn--tiny undefined !text-sm !font-semibold !tracking-tight !py-1 !px-3 !rounded-md !px- focus-visible:!border-orange-500 focus:outline-none focus-visible:ring focus-visible:!ring-orange-200 !bg-orange-500 !border-orange-500 hover:!bg-orange-600 sbui-btn--text-align-center">
                 <span >submit</span>
               </button>
-              <button
+              {/* <button
                 onClick={() => console.log("onHandeLuck")}
                 className="sbui-btn sbui-btn-link sbui-btn--tiny undefined !text-sm !font-semibold !tracking-tight !py-1 !px-3 !rounded-md !px- focus-visible:!border-orange-500 focus:outline-none focus-visible:ring focus-visible:!ring-orange-200 !text-orange-600 hover:!bg-orange-100 sbui-btn--text-align-center"
-              >{`I'm feeling lucky`}</button>
+              >{`I'm feeling lucky`}</button> */}
             </div>
           </div>
         </div>

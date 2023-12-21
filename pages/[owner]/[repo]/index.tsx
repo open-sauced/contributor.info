@@ -15,7 +15,7 @@ interface PaginatedDataResponse {
 const ChildWithSWR = (props: { owner: string; repo: string }) => {
   const { owner, repo } = props;
   const { data, error, mutate } = useSWR<PaginatedDataResponse, Error>(
-    `repos/${owner}/${repo}/contributions`
+    `prs/search?page=1&limit=10&range=30&prev_days_start_date=0&repo=${owner}%2F${repo}`
   );
 
   if (!data) {

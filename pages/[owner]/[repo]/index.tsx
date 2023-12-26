@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import prCounts from "./prCounts";
 
 type Response =
   | { type: "loading" }
@@ -22,11 +23,11 @@ const ChildWithSWR = (props: { owner: string; repo: string }) => {
     return <>Loading...</>;
   }
 
+    const chartData = prCounts(data);
   return (
     <>
-      Got data:
       <pre>
-        <code>{JSON.stringify({ data, error }, null, 2)}</code>
+        <code>{JSON.stringify({ chartData, error }, null, 2)}</code>
       </pre>
     </>
   );

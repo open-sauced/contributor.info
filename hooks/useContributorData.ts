@@ -1,6 +1,5 @@
 import useSWR from "swr";
 import { useCallback } from "react";
-
 interface PaginatedDataResponse {
   readonly data: DBContributors[];
   readonly meta: Meta;

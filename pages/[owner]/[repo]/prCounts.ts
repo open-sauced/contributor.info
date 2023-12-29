@@ -50,15 +50,15 @@ const prPerDay = (prData) => {
     }
   });
 
-  const transformedData = Object.entries(mergedPRsPerDay).map(([x, y]) => ({ id: x, x, y }));
+  const transformedData = Object.entries(mergedPRsPerDay).map(([x, y]) => ({ x, y }));
 
   console.log("Merged PRs per day:", transformedData);
 
-  return {
+  return [{
     id: "perDay",
     color: "#f59e0b",
     data: transformedData,
-  };
+  }];
 
 };
 

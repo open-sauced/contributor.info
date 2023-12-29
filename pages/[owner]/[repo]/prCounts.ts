@@ -1,7 +1,7 @@
 
-const prCounts = async (prData) => {
-  const meta = await count(prData);
-  const prsPerDay = await prPerDay(prData);
+const prCounts = (prData) => {
+  const meta = count(prData);
+  const prsPerDay = prPerDay(prData);
 
   return {
     meta,

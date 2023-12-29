@@ -23,7 +23,8 @@ const ChildWithSWR = (props: { owner: string; repo: string }) => {
     return <>Loading...</>;
   }
 
-    const chartData = prCounts(data);
+  const chartData = prCounts(data);
+
   return (
     <>
       <pre>

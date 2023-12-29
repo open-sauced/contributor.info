@@ -25,6 +25,10 @@ const count = (prData): { mergedCount: number; closedCount: number; totalCount: 
 
   const totalCount = prData.data.length; // Total number of PRs
 
+  console.log("Merged PRs:", mergedCount);
+  console.log("Closed PRs:", closedCount);
+  console.log("Total PRs:", totalCount);
+
   return {
     mergedCount,
     closedCount,
@@ -46,9 +50,16 @@ const prPerDay = (prData) => {
     }
   });
 
-  const transformedData = Object.entries(mergedPRsPerDay).map(([x, y]) => ({ x, y }));
+  const transformedData = Object.entries(mergedPRsPerDay).map(([x, y]) => ({ id: x, x, y }));
 
-  return transformedData;
+  console.log("Merged PRs per day:", transformedData);
+
+  return {
+    id: "perDay",
+    color: "#f59e0b",
+    data: transformedData,
+  };
+
 };
 
 export default prCounts;

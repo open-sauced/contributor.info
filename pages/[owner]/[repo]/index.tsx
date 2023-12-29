@@ -29,7 +29,7 @@ const ChildWithSWR = (props: { owner: string; repo: string }) => {
 
   return (
     <>
-      <CIResponsiveLine data={chartData.prsPerDay} />
+      data && <CIResponsiveLine data={chartData.prsPerDay} />
     </>
   );
 };

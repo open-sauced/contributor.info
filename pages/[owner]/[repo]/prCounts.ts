@@ -25,10 +25,6 @@ const count = (prData): { mergedCount: number; closedCount: number; totalCount: 
 
   const totalCount = prData.data.length; // Total number of PRs
 
-  console.log("Merged PRs:", mergedCount);
-  console.log("Closed PRs:", closedCount);
-  console.log("Total PRs:", totalCount);
-
   return {
     mergedCount,
     closedCount,
@@ -37,23 +33,22 @@ const count = (prData): { mergedCount: number; closedCount: number; totalCount: 
 };
 
 const prPerDay = (prData) => {
-  // Create an object to store merged PRs per day
   const mergedPRsPerDay = {};
 
   prData.data.forEach((item) => {
-    const mergedDate = new Date(item.pr_merged_at).toLocaleDateString(); // Extracting the date
+    const mergedDate = new Date(item.pr_merged_at).toLocaleDateString();
 
     if (item.pr_is_merged === true && item.pr_merged_at !== "0001-01-01T00:00:00.000Z") {
       if (!mergedPRsPerDay[mergedDate]) {
-        mergedPRsPerDay[mergedDate] = 0; // Initialize count for the day if it doesn't exist
+        mergedPRsPerDay[mergedDate] = 0;
       }
-      mergedPRsPerDay[mergedDate]++; // Increment merged PR count for that day
+      mergedPRsPerDay[mergedDate]++;
     }
   });
 
-  console.log("Merged PRs per day:", mergedPRsPerDay);
+  const transformedData = Object.entries(mergedPRsPerDay).map(([x, y]) => ({ x, y }));
 
-  return mergedPRsPerDay;
-}
+  return transformedData;
+};
 
 export default prCounts;

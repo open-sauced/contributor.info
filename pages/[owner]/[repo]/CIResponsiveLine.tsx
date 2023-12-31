@@ -1,13 +1,9 @@
-import { ResponsiveLine } from "@nivo/line";
+import { ResponsiveLine, Serie } from "@nivo/line";
 
-interface CIResponsiveLineProps {
-  data?: CIResponsiveLinePropseDatum[];
-}
-
-const CIResponsiveLine = ({ data }: CIResponsiveLineProps) => {
+const CIResponsiveLine = ({ data }: Serie) => {
   return (
     <>
-      <div style={{ height: 200 }}>
+      <div style={{ height: 400 }}>
         <ResponsiveLine
           data={data}
           margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
@@ -26,7 +22,6 @@ const CIResponsiveLine = ({ data }: CIResponsiveLineProps) => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "transportation",
             legendOffset: 36,
             legendPosition: "middle",
           }}
@@ -34,14 +29,14 @@ const CIResponsiveLine = ({ data }: CIResponsiveLineProps) => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "count",
+            legend: "Pull Requests per Day",
             legendOffset: -40,
             legendPosition: "middle",
           }}
           pointSize={10}
           pointColor={{ theme: "background" }}
           pointBorderWidth={2}
-          pointBorderColor={{ from: "serieColor" }}
+          pointBorderColor={{ from: "seriesColor" }}
           pointLabelYOffset={-12}
           useMesh={true}
           legends={[

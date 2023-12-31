@@ -55,7 +55,7 @@ const prPerDay = (prData) => {
   console.log("Merged PRs per day:", transformedData);
 
   return [{
-    id: "perDay",
+    id: "Pull Requests",
     color: "#f59e0b",
     data: transformedData,
   }];

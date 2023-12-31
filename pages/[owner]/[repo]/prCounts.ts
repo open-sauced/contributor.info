@@ -57,7 +57,7 @@ const prPerDay = (prData) => {
   return [{
     id: "Pull Requests",
     color: "#f59e0b",
-    data: transformedData,
+    data: transformedData
   }];
 
 };

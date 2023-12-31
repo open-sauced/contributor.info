@@ -29,6 +29,12 @@ const ChildWithSWR = (props: { owner: string; repo: string }) => {
 
   return (
     <>
+      <ul>
+        <li key="mergedCount">Merged: {chartData.meta.mergedCount}</li>
+        <li key="closedCount">Closed: {chartData.meta.closedCount}</li>
+        <li key="totalCount">Total: {chartData.meta.totalCount}</li>
+      </ul>
+
       <CIResponsiveLine data={chartData.prsPerDay} />
     </>
   );

@@ -29,7 +29,7 @@ const CIResponsiveLine = ({ data }: Serie) => {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "Pull Requests per Day",
+            legend: "Pull Requests Merged per Day",
             legendOffset: -40,
             legendPosition: "middle",
           }}

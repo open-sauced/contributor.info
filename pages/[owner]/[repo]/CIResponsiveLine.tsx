@@ -1,4 +1,4 @@
-import { ResponsiveLine, Serie, Datum } from "@nivo/line";
+import { ResponsiveLine, Datum } from "@nivo/line";
 
 const CIResponsiveLine = ({ data }: Datum) => {
   return (
@@ -13,7 +13,7 @@ const CIResponsiveLine = ({ data }: Datum) => {
             min: "auto",
             max: "auto",
             stacked: true,
-            reverse: false,
+            reverse: false
           }}
           yFormat=" >-.2f"
           axisTop={null}
@@ -23,7 +23,7 @@ const CIResponsiveLine = ({ data }: Datum) => {
             tickPadding: 5,
             tickRotation: 0,
             legendOffset: 36,
-            legendPosition: "middle",
+            legendPosition: "middle"
           }}
           axisLeft={{
             tickSize: 5,
@@ -31,7 +31,7 @@ const CIResponsiveLine = ({ data }: Datum) => {
             tickRotation: 0,
             legend: "Pull Requests Merged per Day",
             legendOffset: -40,
-            legendPosition: "middle",
+            legendPosition: "middle"
           }}
           pointSize={10}
           pointColor={{ theme: "background" }}
@@ -59,11 +59,11 @@ const CIResponsiveLine = ({ data }: Datum) => {
                   on: "hover",
                   style: {
                     itemBackground: "rgba(0, 0, 0, .03)",
-                    itemOpacity: 1,
-                  },
-                },
-              ],
-            },
+                    itemOpacity: 1
+                  }
+                }
+              ]
+            }
           ]}
         />
       </div>

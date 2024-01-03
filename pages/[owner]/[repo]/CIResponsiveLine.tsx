@@ -1,6 +1,14 @@
 import { ResponsiveLine, Datum } from "@nivo/line";
+import { format, parse } from "date-fns";
 
 const CIResponsiveLine = ({ data }: Datum) => {
+  const maxFilesModified = data.reduce((max: number, curr: { y: any }) => {
+    const { y } = curr;
+    if (Number(y) > max) {
+      return y as number;
+    }
+    return max;
+  }, 0);
   return (
     <>
       <div style={{ height: 400, width: "100%" }}>
@@ -9,22 +17,27 @@ const CIResponsiveLine = ({ data }: Datum) => {
           margin={{ top: 50, right: 150, bottom: 50, left: 60 }}
           yScale={{
             type: "linear",
-            min: "auto",
-            max: "auto",
-            stacked: true,
-            reverse: false,
           }}
-          curve="monotoneX"
-          yFormat=" >-.2f"
+          motionConfig="stiff"
+          curve="catmullRom"
+          enableSlices="x"
           axisTop={null}
+          isInteractive={true}
           axisRight={null}
           axisLeft={{
-            tickSize: 5,
+            tickValues: 5,
+            tickSize: 0,
             tickPadding: 5,
             tickRotation: 0,
             legend: "Pull Requests Merged per Day",
             legendOffset: -40,
             legendPosition: "middle",
+          }}
+          axisBottom={{
+            tickSize: 0,
+            format: (value) => {
+              return format(parse(value, "dd/MM/yyyy", new Date()), "MMM d");
+            },
           }}
           pointSize={0}
           pointColor={{ theme: "background" }}
@@ -32,8 +45,9 @@ const CIResponsiveLine = ({ data }: Datum) => {
           enableGridY={false}
           useMesh={true}
           enableArea={false}
-          // legends={[]}
-          enableCrosshair={false}
+          enableCrosshair={true}
+          enablePointLabel={false}
+          colors={(d) => d.color}
         />
       </div>
     </>

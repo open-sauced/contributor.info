@@ -96,8 +96,8 @@ const ChildWithSWR = (props: { owner: string; repo: string }) => {
   };
 
   return (
-    <div className="bg-white h-screen flex justify-center items-center w-full flex-col px-8">
-      <div className="w-max flex gap-3 mr-auto flex-wrap">
+    <div className="bg-white h-screen flex justify-center items-center w-full flex-col px-8 text-black">
+      <div className="flex gap-3 mr-auto flex-wrap">
         <StatsCard
           type="pr"
           status="open"

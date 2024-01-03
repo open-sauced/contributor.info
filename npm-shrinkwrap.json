@@ -12,6 +12,7 @@
       "dependencies": {
         "@nivo/core": "^0.84.0",
         "@nivo/line": "^0.84.0",
+        "date-fns": "^3.0.6",
         "next": "12.2.5",
         "react": "18.2.0",
         "react-dom": "18.2.0",
@@ -3990,6 +3991,15 @@
       "resolved": "https://registry.npmjs.org/damerau-levenshtein/-/damerau-levenshtein-1.0.8.tgz",
       "integrity": "sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==",
       "dev": true
+    },
+    "node_modules/date-fns": {
+      "version": "3.0.6",
+      "resolved": "https://registry.npmjs.org/date-fns/-/date-fns-3.0.6.tgz",
+      "integrity": "sha512-W+G99rycpKMMF2/YD064b2lE7jJGUe+EjOES7Q8BIGY8sbNdbgcs9XFTZwvzc9Jx1f3k7LB7gZaZa7f8Agzljg==",
+      "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/kossnocorp"
+      }
     },
     "node_modules/debug": {
       "version": "4.3.4",

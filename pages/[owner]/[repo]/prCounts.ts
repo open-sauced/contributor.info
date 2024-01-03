@@ -1,15 +1,3 @@
-import { PaginatedDataResponse } from ".";
-
-const prCounts = (prData: DBContributorsPR[]) => {
-  const meta = count(prData);
-  const prsPerDay = prPerDay(prData);
-
-  return {
-    meta,
-    prsPerDay,
-  };
-};
-
 const count = (prData: DBContributorsPR[]): { mergedCount: number; closedCount: number; totalCount: number } => {
   const mergedCount = prData.filter((item) => item.pr_is_merged).length; // Merged PRs
   const closedCount = prData.filter((item) => item.pr_state === "closed").length; // Closed PRs
@@ -23,17 +11,24 @@ const count = (prData: DBContributorsPR[]): { mergedCount: number; closedCount: 
   };
 };
 
-const prPerDay = (prData: DBContributorsPR[]) => {
-  const sortedPRs = prData.sort((a, b) => {
+const prPerDay = (open: DBContributorsPR[], closed: DBContributorsPR[]) => {
+  const sortedMergedPRs = closed.sort((a, b) => {
     const aDate = new Date(a.pr_created_at);
     const bDate = new Date(b.pr_created_at);
 
     return aDate.getTime() - bDate.getTime();
   });
-  const mergedPRsPerDay = sortedPRs.reduce<Record<string, number>>((acc, item) => {
+
+  const sortedOpenedPRs = open.sort((a, b) => {
+    const aDate = new Date(a.pr_created_at);
+    const bDate = new Date(b.pr_created_at);
+
+    return aDate.getTime() - bDate.getTime();
+  });
+  const mergedPRsPerDay = sortedMergedPRs.reduce<Record<string, number>>((acc, item) => {
     const mergedDate = new Date(item.pr_merged_at).toLocaleDateString();
 
-    if (item.pr_is_merged && item.pr_merged_at !== "0001-01-01T00:00:00.000Z") {
+    if (item.pr_is_merged) {
       if (!acc[mergedDate]) {
         acc[mergedDate] = 0;
       }
@@ -43,10 +38,10 @@ const prPerDay = (prData: DBContributorsPR[]) => {
     return acc;
   }, {});
 
-  const closedPRsPerDay = sortedPRs.reduce<Record<string, number>>((acc, item) => {
+  const closedPRsPerDay = sortedMergedPRs.reduce<Record<string, number>>((acc, item) => {
     const closedDate = new Date(item.pr_updated_at).toLocaleDateString();
 
-    if (item.pr_state === "closed") {
+    if (item.pr_is_merged === false) {
       if (!acc[closedDate]) {
         acc[closedDate] = 0;
       }
@@ -56,15 +51,13 @@ const prPerDay = (prData: DBContributorsPR[]) => {
     return acc;
   }, {});
 
-  const openedPRsPerDay = sortedPRs.reduce<Record<string, number>>((acc, item) => {
+  const openedPRsPerDay = sortedOpenedPRs.reduce<Record<string, number>>((acc, item) => {
     const openedDate = new Date(item.pr_created_at).toLocaleDateString();
 
-    if (item.pr_state === "open") {
-      if (!acc[openedDate]) {
-        acc[openedDate] = 0;
-      }
-      acc[openedDate]++;
+    if (!acc[openedDate]) {
+      acc[openedDate] = 0;
     }
+    acc[openedDate]++;
 
     return acc;
   }, {});
@@ -74,8 +67,6 @@ const prPerDay = (prData: DBContributorsPR[]) => {
 
   const mergedPrs = Object.entries(mergedPRsPerDay).map(([x, y]) => ({ x, y }));
 
-  console.log("Merged PRs per day:", mergedPrs);
-
   return [
     {
       id: "Opened PRs",
@@ -83,7 +74,7 @@ const prPerDay = (prData: DBContributorsPR[]) => {
       data: openedPRs,
     },
     {
-      id: "Pull Requests",
+      id: "Merged PRs",
       color: "#f59e0b",
       data: mergedPrs,
     },
@@ -95,4 +86,4 @@ const prPerDay = (prData: DBContributorsPR[]) => {
   ];
 };
 
-export default prCounts;
+export default prPerDay;

@@ -9,7 +9,8 @@ import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
 
 const CIResponsiveLine = dynamic(() => import("./CIResponsiveLine"), { ssr: false });
 
-import prCounts from "./prCounts";
+import prPerDay from "./prCounts";
+import { useContributorData } from "hooks/useContributorData";
 
 export interface PaginatedDataResponse {
   readonly data: DBContributorsPR[];
@@ -24,19 +25,26 @@ interface StatsCardProps {
 }
 const ChildWithSWR = (props: { owner: string; repo: string }) => {
   const { owner, repo } = props;
-  const { data, error, mutate } = useSWR<PaginatedDataResponse, Error>(`prs/search?repo=${owner}%2F${repo}`);
-  // fetch previous months data seperately to compare
-  const {
-    data: prevMonthData,
-    error: prevMonthError,
-    mutate: prevMonthMutate,
-  } = useSWR<PaginatedDataResponse, Error>(`prs/search?repo=${owner}%2F${repo}&prev_days_start_date=30`);
 
-  if (!data && !error) {
+  const { data: openedPrs } = useContributorData(`${owner}/${repo}`, 0, "open");
+  const { data: prevMonthOpenedPrs, meta: prevMonthOpenedPrsMeta } = useContributorData(`${owner}/${repo}`, 30, "open");
+
+  const { data: closedPrs } = useContributorData(`${owner}/${repo}`, 0, "closed");
+  const { data: prevMonthClosedPrs, meta: prevMonthClosedPrsMeta } = useContributorData(
+    `${owner}/${repo}`,
+    30,
+    "closed"
+  );
+
+  const { data: currentData, isError, isLoading, meta } = useContributorData(`${owner}/${repo}`);
+
+  // fetch previous months data seperately to compare
+
+  if (isLoading) {
     return <>Loading...</>;
   }
 
-  const chartData = prCounts(data!.data);
+  const chartData = prPerDay(openedPrs, closedPrs);
 
   const getPercentageChange = (prevCount: number, currentCount: number) => {
     const percentageChange = ((currentCount - prevCount) / prevCount) * 100;
@@ -93,24 +101,24 @@ const ChildWithSWR = (props: { owner: string; repo: string }) => {
         <StatsCard
           type="pr"
           status="open"
-          count={chartData.meta.totalCount}
-          prevMonthCount={prevMonthData ? prCounts(prevMonthData!.data).meta.totalCount : undefined}
+          count={meta.itemCount}
+          prevMonthCount={prevMonthOpenedPrs ? prevMonthOpenedPrsMeta.itemCount : undefined}
         />
         <StatsCard
           type="pr"
           status="merged"
-          count={chartData.meta.mergedCount}
-          prevMonthCount={prevMonthData ? prCounts(prevMonthData!.data).meta.mergedCount : undefined}
+          count={closedPrs.filter((pr) => pr.pr_is_merged === true).length}
+          prevMonthCount={prevMonthClosedPrs ? prevMonthClosedPrsMeta.itemCount : undefined}
         />
         <StatsCard
           type="pr"
           status="closed"
-          count={chartData.meta.closedCount}
-          prevMonthCount={prevMonthData ? prCounts(prevMonthData!.data).meta.closedCount : undefined}
+          count={closedPrs.filter((item) => item.pr_state === "close" && !item.pr_is_merged).length}
+          prevMonthCount={prevMonthClosedPrsMeta ? prevMonthClosedPrsMeta.itemCount : undefined}
         />
       </div>
 
-      <CIResponsiveLine data={chartData.prsPerDay} />
+      <CIResponsiveLine data={chartData} />
 
       <div className="flex justify-center gap-4 flex-wrap"></div>
     </div>

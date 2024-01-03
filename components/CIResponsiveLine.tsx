@@ -2,13 +2,6 @@ import { ResponsiveLine, Datum } from "@nivo/line";
 import { format, parse } from "date-fns";
 
 const CIResponsiveLine = ({ data }: Datum) => {
-  const maxFilesModified = data.reduce((max: number, curr: { y: any }) => {
-    const { y } = curr;
-    if (Number(y) > max) {
-      return y as number;
-    }
-    return max;
-  }, 0);
   return (
     <>
       <div style={{ height: 400, width: "100%" }}>

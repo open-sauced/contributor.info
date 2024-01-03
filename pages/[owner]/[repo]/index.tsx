@@ -6,9 +6,9 @@ import { AiOutlinePullRequest } from "react-icons/ai";
 import { GoGitMerge, GoGitPullRequestClosed, GoIssueOpened, GoIssueClosed } from "react-icons/go";
 import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
 
-const CIResponsiveLine = dynamic(() => import("./CIResponsiveLine"), { ssr: false });
+const CIResponsiveLine = dynamic(() => import("components/CIResponsiveLine"), { ssr: false });
 
-import prPerDay from "../../../lib/prCounts";
+import prPerDay from "lib/prCounts";
 import { useContributorData } from "hooks/useContributorData";
 
 export interface PaginatedDataResponse {

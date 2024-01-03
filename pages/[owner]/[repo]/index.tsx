@@ -1,6 +1,5 @@
 import React from "react";
 import { useRouter } from "next/router";
-import useSWR from "swr";
 import dynamic from "next/dynamic";
 
 import { AiOutlinePullRequest } from "react-icons/ai";
@@ -9,7 +8,7 @@ import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
 
 const CIResponsiveLine = dynamic(() => import("./CIResponsiveLine"), { ssr: false });
 
-import prPerDay from "./prCounts";
+import prPerDay from "../../../lib/prCounts";
 import { useContributorData } from "hooks/useContributorData";
 
 export interface PaginatedDataResponse {
@@ -47,7 +46,7 @@ const ChildWithSWR = (props: { owner: string; repo: string }) => {
   const chartData = prPerDay(openedPrs, closedPrs);
 
   const getPercentageChange = (prevCount: number, currentCount: number) => {
-    const percentageChange = ((currentCount - prevCount) / prevCount) * 100;
+    const percentageChange = Math.abs((currentCount - prevCount) / prevCount) * 100;
     return percentageChange;
   };
 

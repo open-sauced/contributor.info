@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import dynamic from "next/dynamic";
+
+const CIResponsiveLine = dynamic(() => import("./CIResponsiveLine"), { ssr: false });
+
+import prCounts from "./prCounts";
 
 type Response =
   | { type: "loading" }
@@ -14,20 +19,23 @@ interface PaginatedDataResponse {
 
 const ChildWithSWR = (props: { owner: string; repo: string }) => {
   const { owner, repo } = props;
-  const { data, error, mutate } = useSWR<PaginatedDataResponse, Error>(
-    `prs/search?repo=${owner}%2F${repo}`
-  );
+  const { data, error, mutate } = useSWR<PaginatedDataResponse, Error>(`prs/search?repo=${owner}%2F${repo}`);
 
   if (!data) {
     return <>Loading...</>;
   }
 
+  const chartData = prCounts(data);
+
   return (
     <>
-      Got data:
-      <pre>
-        <code>{JSON.stringify({ data, error }, null, 2)}</code>
-      </pre>
+      <ul>
+        <li key="mergedCount">Merged: {chartData.meta.mergedCount}</li>
+        <li key="closedCount">Closed: {chartData.meta.closedCount}</li>
+        <li key="totalCount">Total: {chartData.meta.totalCount}</li>
+      </ul>
+
+      <CIResponsiveLine data={chartData.prsPerDay} />
     </>
   );
 };

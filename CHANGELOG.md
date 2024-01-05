@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.1.0-beta.3](https://github.com/open-sauced/contributor.info/compare/v1.1.0-beta.2...v1.1.0-beta.3) (2024-01-05)
+
+
+### 🍕 Features
+
+* spice up contributors pr chart styles ([#20](https://github.com/open-sauced/contributor.info/issues/20)) ([bdf937f](https://github.com/open-sauced/contributor.info/commit/bdf937fbe3f5d900576f4401f1667253b3832a7a))
+
 ## [1.1.0-beta.2](https://github.com/open-sauced/contributor.info/compare/v1.1.0-beta.1...v1.1.0-beta.2) (2024-01-05)
 
 

@@ -5,8 +5,7 @@
 
 > All notable changes to this project will be documented in this file
 
-## [1.1.0](https://github.com/open-sauced/contributor.info/compare/v1.0.0...v1.1.0) (2022-09-27)
-
+## [1.1.0-beta.3](https://github.com/open-sauced/contributor.info/compare/v1.1.0-beta.2...v1.1.0-beta.3) (2024-01-05)
 
 ### 🧑‍💻 Code Refactoring
 
@@ -15,7 +14,16 @@
 
 ### 🍕 Features
 
-* Adds working search to home page ([#11](https://github.com/open-sauced/contributor.info/issues/11)) ([f88bf74](https://github.com/open-sauced/contributor.info/commit/f88bf749c66d077c516617fa2b2db7fa1d9bef7b)), closes [#4](https://github.com/open-sauced/contributor.info/issues/4)
+* spice up contributors pr chart styles ([#20](https://github.com/open-sauced/contributor.info/issues/20)) ([bdf937f](https://github.com/open-sauced/contributor.info/commit/bdf937fbe3f5d900576f4401f1667253b3832a7a))
+
+## [1.1.0-beta.2](https://github.com/open-sauced/contributor.info/compare/v1.1.0-beta.1...v1.1.0-beta.2) (2024-01-05)
+
+
+### 🍕 Features
+
+* Add a PR activity chart ([#19](https://github.com/open-sauced/contributor.info/issues/19)) ([9bac59a](https://github.com/open-sauced/contributor.info/commit/9bac59ac251a8a057185b26996347da2d0689df1))
+* use v2 pr/search ([#16](https://github.com/open-sauced/contributor.info/issues/16)) ([f1f78ff](https://github.com/open-sauced/contributor.info/commit/f1f78ff0b6df53a83e653c2e031232b03acb26e8))
+* Working Nivo chart ([#22](https://github.com/open-sauced/contributor.info/issues/22)) ([22c07a9](https://github.com/open-sauced/contributor.info/commit/22c07a9f62ac540ba9a39edae7d06d14c03d3ef0))
 
 ## [1.1.0-beta.1](https://github.com/open-sauced/contributor.info/compare/v1.0.1-beta.1...v1.1.0-beta.1) (2022-09-27)
 

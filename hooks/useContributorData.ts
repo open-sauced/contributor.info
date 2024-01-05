@@ -1,46 +1,38 @@
 import useSWR from "swr";
 import { useCallback } from "react";
 interface PaginatedDataResponse {
-  readonly data: DBContributors[];
+  readonly data: DBContributorsPR[];
   readonly meta: Meta;
 }
 
-type Response =
-  | { type: "loading" }
-  | { type: "error"; error: Error }
-  // Todo: figure out meta
-  | { type: "result"; data: DBContributors[]; meta: { itemCount: number } };
-
 // We're not currently using this, we're just using useSWR directly inside ChildWithSWR
 // this needs useCallback wrap if we want to use it in the other component
-const useContributorData = () => {
-  useCallback(async (owner: string, repo: string): Promise<Response> => {
-    // useSWR is probably going to be a sticking point
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { data, error, mutate } = useSWR<PaginatedDataResponse, Error>(
-      `repos/${owner}/${repo}/contributions`
-    );
+const useContributorData = (repo: string, startDate?: number, status?: "closed" | "open") => {
+  const query = new URLSearchParams();
 
-    if (!error && !data) {
-      return { type: "loading" };
-    }
+  if (startDate) {
+    query.set("prev_days_start_date", `${startDate}`);
+  }
+  if (status) {
+    query.set("status", `${status}`);
+  }
+  query.set("repo", `${repo}`);
 
-    if (error) {
-      return {
-        type: "error",
-        error: error
-      };
-    }
+  query.set("limit", "100");
 
-    return {
-      type: "result",
-      data: data?.data ?? [],
-      meta: data?.meta ?? { itemCount: 0 }
-      // commenting for now to appease build
-      // mutate
-    };
-  }, []);
+  const baseEndpoint = "prs/search";
+
+  const endpointString = `${baseEndpoint}?${query.toString()}`;
+
+  const { data, error, mutate } = useSWR<PaginatedDataResponse, Error>(repo ? endpointString : null);
+
+  return {
+    data: data?.data ?? [],
+    isLoading: !data && !error,
+    isError: Object.keys(error ?? {}).length > 0,
+    meta: data?.meta ?? { itemCount: 0 },
+    mutate,
+  };
 };
-// good catch []
 
 export { useContributorData };

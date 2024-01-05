@@ -1,5 +1,16 @@
+interface PrData {
+  data: {
+    pr_is_merged: boolean;
+    pr_state: string;
+    pr_merged_at: string;
+  }[];
+}
 
-const prCounts = (prData) => {
+interface mergedPRsPerDay {
+  [key: string]: number;
+}
+
+const prCounts = (prData: PrData) => {
   const meta = count(prData);
   const prsPerDay = prPerDay(prData);
 
@@ -9,7 +20,7 @@ const prCounts = (prData) => {
   };
 };
 
-const count = (prData): { mergedCount: number; closedCount: number; totalCount: number } => {
+const count = (prData: PrData): { mergedCount: number; closedCount: number; totalCount: number } => {
   let mergedCount = 0;
   let closedCount = 0;
 
@@ -36,8 +47,8 @@ const count = (prData): { mergedCount: number; closedCount: number; totalCount: 
   };
 };
 
-const prPerDay = (prData) => {
-  const mergedPRsPerDay = {};
+const prPerDay = (prData: PrData) => {
+  const mergedPRsPerDay: mergedPRsPerDay = {};
 
   prData.data.forEach((item) => {
     const mergedDate = new Date(item.pr_merged_at).toLocaleDateString();

@@ -13,8 +13,8 @@ const count = (prData: DBContributorsPR[]): { mergedCount: number; closedCount: 
 
 const prPerDay = (open: DBContributorsPR[], closed: DBContributorsPR[]) => {
   const sortedMergedPRs = closed.sort((a, b) => {
-    const aDate = new Date(a.pr_created_at);
-    const bDate = new Date(b.pr_created_at);
+    const aDate = new Date(a.pr_closed_at);
+    const bDate = new Date(b.pr_closed_at);
 
     return aDate.getTime() - bDate.getTime();
   });

@@ -10,9 +10,13 @@ const CIResponsiveLine = ({ data }: Datum) => {
           margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
           yScale={{
             type: "linear",
+            stacked: true,
+          }}
+          xScale={{
+            type: "point",
           }}
           motionConfig="stiff"
-          curve="catmullRom"
+          curve="basis"
           enableSlices="x"
           axisTop={null}
           isInteractive={true}
@@ -38,7 +42,6 @@ const CIResponsiveLine = ({ data }: Datum) => {
           enableGridY={false}
           useMesh={true}
           enableArea={false}
-          enableCrosshair={true}
           enablePointLabel={false}
           colors={(d) => d.color}
         />

@@ -24,4 +24,5 @@ interface DBContributorsPR {
   readonly pr_title: string;
   readonly pr_updated_at: string;
   readonly repo_name: string;
+  readonly pr_closed_at: string;
 }

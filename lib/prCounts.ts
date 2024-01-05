@@ -75,7 +75,7 @@ const prPerDay = (open: DBContributorsPR[], closed: DBContributorsPR[]) => {
     },
     {
       id: "Merged PRs",
-      color: "#3b38f1",
+      color: "#A78BFA",
       data: mergedPrs,
     },
     {

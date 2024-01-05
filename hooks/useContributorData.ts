@@ -1,13 +1,22 @@
-import useSWR from "swr";
+import useSWR, { Fetcher } from "swr";
 import { useCallback } from "react";
+import apiFetcher from "./useSWR";
 interface PaginatedDataResponse {
   readonly data: DBContributorsPR[];
   readonly meta: Meta;
 }
 
+type query = {
+  repo: string;
+  limit?: number;
+  startDate?: number;
+  status?: "closed" | "open";
+  initialData?: PaginatedDataResponse;
+};
+
 // We're not currently using this, we're just using useSWR directly inside ChildWithSWR
 // this needs useCallback wrap if we want to use it in the other component
-const useContributorData = (repo: string, startDate?: number, status?: "closed" | "open") => {
+const useContributorData = ({ repo, startDate, status, limit, initialData }: query) => {
   const query = new URLSearchParams();
 
   if (startDate) {
@@ -24,7 +33,11 @@ const useContributorData = (repo: string, startDate?: number, status?: "closed" 
 
   const endpointString = `${baseEndpoint}?${query.toString()}`;
 
-  const { data, error, mutate } = useSWR<PaginatedDataResponse, Error>(repo ? endpointString : null);
+  const { data, error, mutate } = useSWR<PaginatedDataResponse, Error>(
+    repo ? endpointString : null,
+    apiFetcher as Fetcher<PaginatedDataResponse, Error>,
+    { fallbackData: initialData }
+  );
 
   return {
     data: data?.data ?? [],

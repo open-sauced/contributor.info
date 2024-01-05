@@ -35,7 +35,7 @@ jobs:
       - name: "🔧 setup node"
         uses: actions/setup-node@v2.1.5
         with:
-          node-version: 16
+          node-version: 18
 
       - name: "🔧 install npm@latest"
         run: npm i -g npm@latest
@@ -62,11 +62,20 @@ jobs:
       - test
       - build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
+      - name: Generate token
+        id: generate_token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.OS_GITHUB_APP_ID }}
+          private_key: ${{ secrets.OS_GITHUB_APP_PRIVATE_KEY }}
+
       - name: "☁️ checkout repository"
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+          token: ${{ steps.generate_token.outputs.token }}
 
       - name: "📂 download build artifacts"
         uses: actions/download-artifact@v2
@@ -78,7 +87,8 @@ jobs:
         id: semantic-release
         uses: open-sauced/release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          HUSKY: 0
 
   cleanup:
     name: Cleanup actions

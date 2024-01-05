@@ -29,7 +29,7 @@ const CIResponsiveLine = ({ data }: Datum) => {
           axisBottom={{
             tickSize: 0,
             format: (value) => {
-              return format(parse(value, "dd/MM/yyyy", new Date()), "MMM d");
+              return format(parse(value, "MM/dd/yyyy", new Date()), "MMM d");
             },
           }}
           pointSize={0}

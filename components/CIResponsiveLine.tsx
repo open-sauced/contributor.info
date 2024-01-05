@@ -7,7 +7,7 @@ const CIResponsiveLine = ({ data }: Datum) => {
       <div style={{ height: 400, width: "100%" }}>
         <ResponsiveLine
           data={data}
-          margin={{ top: 50, right: 150, bottom: 50, left: 60 }}
+          margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
           yScale={{
             type: "linear",
           }}

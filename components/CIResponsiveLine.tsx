@@ -12,9 +12,6 @@ const CIResponsiveLine = ({ data }: Datum) => {
             type: "linear",
             stacked: true,
           }}
-          xScale={{
-            type: "point",
-          }}
           motionConfig="stiff"
           curve="basis"
           enableSlices="x"
@@ -32,8 +29,21 @@ const CIResponsiveLine = ({ data }: Datum) => {
           }}
           axisBottom={{
             tickSize: 0,
+            tickValues: 7,
+            tickPadding: 5,
             format: (value) => {
-              return format(parse(value, "dd/MM/yyyy", new Date()), "MMM d");
+              const date = parse(value, "MM/dd/yyyy", new Date());
+              return format(date, "MMM d");
+            },
+          }}
+          theme={{
+            axis: {},
+            grid: {
+              line: {
+                strokeDasharray: "4 4",
+                strokeWidth: 1,
+                strokeOpacity: 0.7,
+              },
             },
           }}
           pointSize={0}

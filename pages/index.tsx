@@ -15,15 +15,6 @@ const Home: NextPage = () => {
     event.preventDefault();
   };
 
-  // const handleLuck = (React.MouseEvent) => {
-  //   const randomRepo = Math.floor(Math.random() * 100);
-
-  //   // fetch top 100 repos and pass int
-  //   searchBoxRef.current && router.push(searchBoxRef.current.value);
-  //   event.preventDefault();
-  // };
-
-
   useKeys(["Enter"], handleSubmit, { target: searchBoxRef });
 
   return (
@@ -52,8 +43,12 @@ const Home: NextPage = () => {
             </div>
 
             <div className="flex">
-              <button onClick={(e) => handleSubmit(e)} type="submit" className="mr-2 bui-btn sbui-btn-primary sbui-btn-container--shadow sbui-btn--tiny undefined !text-sm !font-semibold !tracking-tight !py-1 !px-3 !rounded-md !px- focus-visible:!border-orange-500 focus:outline-none focus-visible:ring focus-visible:!ring-orange-200 !bg-orange-500 !border-orange-500 hover:!bg-orange-600 sbui-btn--text-align-center">
-                <span >submit</span>
+              <button
+                onClick={(e) => handleSubmit(e)}
+                type="submit"
+                className="mr-2 bui-btn sbui-btn-primary sbui-btn-container--shadow sbui-btn--tiny undefined !text-sm !font-semibold !tracking-tight !py-1 !px-3 !rounded-md !px- focus-visible:!border-orange-500 focus:outline-none focus-visible:ring focus-visible:!ring-orange-200 !bg-orange-500 !border-orange-500 hover:!bg-orange-600 sbui-btn--text-align-center"
+              >
+                <span>submit</span>
               </button>
               {/* <button
                 onClick={() => console.log("onHandeLuck")}

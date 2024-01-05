@@ -43,7 +43,7 @@ const StatsCard = ({ type, status, count, prevMonthCount }: StatsCardProps) => {
   };
 
   return (
-    <div className="bg-white border shadow rounded-lg p-4 pb-6 flex flex-col gap-4 text-slate-800 min-w-[340px]">
+    <div className="bg-white border shadow rounded-lg p-4 pb-6 flex flex-col gap-4 text-slate-800 w-full md:w-[340px] ">
       <div
         className={`border p-3 rounded-md w-max ${
           status === "open" ? "text-green-500" : status === "closed" ? "text-red-500" : "text-violet-400"
@@ -137,7 +137,7 @@ const OwnerRepo = ({
 
     return (
       <div className="bg-white">
-        <div className="h-screen flex pt-20 w-full container flex-col text-black">
+        <div className="min-h-screen flex pt-20 w-full container flex-col text-black">
           <div className="flex gap-3 mr-auto flex-wrap">
             <StatsCard
               type="pr"

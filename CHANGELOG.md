@@ -7,6 +7,10 @@
 
 ## [1.1.0-beta.3](https://github.com/open-sauced/contributor.info/compare/v1.1.0-beta.2...v1.1.0-beta.3) (2024-01-05)
 
+### 🧑‍💻 Code Refactoring
+
+* improve redirect not found page and route ([#8](https://github.com/open-sauced/contributor.info/issues/8)) ([9da5e11](https://github.com/open-sauced/contributor.info/commit/9da5e116296848175c7b74b0384cc2dab27fdcc2)), closes [#3](https://github.com/open-sauced/contributor.info/issues/3)
+
 
 ### 🍕 Features
 

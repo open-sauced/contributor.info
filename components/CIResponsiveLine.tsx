@@ -7,12 +7,13 @@ const CIResponsiveLine = ({ data }: Datum) => {
       <div style={{ height: 400, width: "100%" }}>
         <ResponsiveLine
           data={data}
-          margin={{ top: 50, right: 150, bottom: 50, left: 60 }}
+          margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
           yScale={{
             type: "linear",
+            stacked: true,
           }}
           motionConfig="stiff"
-          curve="catmullRom"
+          curve="basis"
           enableSlices="x"
           axisTop={null}
           isInteractive={true}
@@ -28,8 +29,21 @@ const CIResponsiveLine = ({ data }: Datum) => {
           }}
           axisBottom={{
             tickSize: 0,
+            tickValues: 7,
+            tickPadding: 5,
             format: (value) => {
-              return format(parse(value, "MM/dd/yyyy", new Date()), "MMM d");
+              const date = parse(value, "MM/dd/yyyy", new Date());
+              return format(date, "MMM d");
+            },
+          }}
+          theme={{
+            axis: {},
+            grid: {
+              line: {
+                strokeDasharray: "4 4",
+                strokeWidth: 1,
+                strokeOpacity: 0.7,
+              },
             },
           }}
           pointSize={0}
@@ -38,7 +52,6 @@ const CIResponsiveLine = ({ data }: Datum) => {
           enableGridY={false}
           useMesh={true}
           enableArea={false}
-          enableCrosshair={true}
           enablePointLabel={false}
           colors={(d) => d.color}
         />

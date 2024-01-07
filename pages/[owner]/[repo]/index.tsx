@@ -2,95 +2,19 @@ import React from "react";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 
-import { AiOutlinePullRequest } from "react-icons/ai";
-import { GoGitMerge, GoGitPullRequestClosed, GoIssueOpened, GoIssueClosed } from "react-icons/go";
-import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
-
 const CIResponsiveLine = dynamic(() => import("components/CIResponsiveLine"), { ssr: false });
 
 import prPerDay from "lib/prCounts";
 import { useContributorData } from "hooks/useContributorData";
 import { GetServerSidePropsContext } from "next";
+import DateFilter from "components/primitives/DateFilter";
+import StatsCard from "components/StatsCard";
+import DataLabel from "components/primitives/DataLabel";
 
 export interface PaginatedDataResponse {
   readonly data: DBContributorsPR[];
   readonly meta: Meta;
 }
-
-interface StatsCardProps {
-  type: "issue" | "pr";
-  count: number;
-  status: "open" | "closed" | "merged";
-  prevMonthCount?: number;
-}
-
-const StatsCard = ({ type, status, count, prevMonthCount }: StatsCardProps) => {
-  const IconMap = {
-    issue: {
-      open: <GoIssueOpened />,
-      closed: <GoIssueClosed />,
-      merged: <GoGitMerge />,
-    },
-    pr: {
-      open: <AiOutlinePullRequest />,
-      closed: <GoGitPullRequestClosed />,
-      merged: <GoGitMerge />,
-    },
-  };
-  const getPercentageChange = (prevCount: number, currentCount: number) => {
-    const percentageChange = Math.abs((currentCount - prevCount) / prevCount) * 100;
-    return percentageChange;
-  };
-
-  return (
-    <div className="bg-white border shadow rounded-lg p-4 pb-6 flex flex-col gap-4 text-slate-800 w-full md:w-[340px] ">
-      <div
-        className={`border p-3 rounded-md w-max ${
-          status === "open" ? "text-green-500" : status === "closed" ? "text-red-500" : "text-violet-400"
-        }`}
-      >
-        {IconMap[type][status]}
-      </div>
-      <div className="capitalize text-gray-500 text-sm">
-        Pull Requests {status === "merged" || status === "closed" ? status : null}
-      </div>
-      <div className="flex items-center justify-between">
-        <span className="text-3xl font-semibold">{count}</span>
-        <div className="flex items-center gap-1">
-          {getPercentageChange(prevMonthCount!, count) >= 0 ? (
-            <FaArrowTrendUp className="text-green-700" />
-          ) : (
-            <FaArrowTrendDown className="text-red-700" />
-          )}
-          <span className={`${getPercentageChange(prevMonthCount!, count) >= 0 ? "text-green-700" : "text-red-700"}`}>
-            {getPercentageChange(prevMonthCount!, count).toFixed(2)}%
-          </span>{" "}
-          vs last month
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const DataLabel = ({ label, type }: { label: string; type: "merged" | "closed" | "open" }) => {
-  const getColorByType = (type: string) => {
-    switch (type) {
-    case "merged":
-      return "bg-violet-400";
-    case "closed":
-      return "bg-red-500";
-    case "open":
-      return "bg-green-500";
-    }
-  };
-
-  return (
-    <div className="flex items-center gap-2">
-      <span className={`p-1 rounded-full ${getColorByType(type)}`}></span>
-      <p className="text-sm text-gray-600">{label}</p>
-    </div>
-  );
-};
 
 const OwnerRepo = ({
   currentOpenPrs,
@@ -107,15 +31,17 @@ const OwnerRepo = ({
 
   const owner = router.query["owner"] as string;
   const repo = router.query["repo"] as string;
+  const range = router.query["range"] as string;
 
   const { data: openedPrs, meta: openedPrsMeta } = useContributorData({
     repo: `${owner}/${repo}`,
     status: "open",
     initialData: currentOpenPrs,
+    range: Number(range ?? 30),
   });
   const { data: prevMonthOpenedPrs, meta: prevMonthOpenedPrsMeta } = useContributorData({
     repo: `${owner}/${repo}`,
-    startDate: 30,
+    startDate: Number(range ?? 30),
     status: "open",
     initialData: prevOpenPrs,
   });
@@ -124,10 +50,11 @@ const OwnerRepo = ({
     repo: `${owner}/${repo}`,
     status: "closed",
     initialData: currentClosedPrs,
+    range: Number(range ?? 30),
   });
   const { data: prevMonthClosedPrs, meta: prevMonthClosedPrsMeta } = useContributorData({
     repo: `${owner}/${repo}`,
-    startDate: 30,
+    startDate: Number(range ?? 30),
     status: "closed",
     initialData: prevClosedPrs,
   });
@@ -142,20 +69,34 @@ const OwnerRepo = ({
             <StatsCard
               type="pr"
               status="open"
+              range={Number(range ?? 30)}
               count={openedPrsMeta.itemCount}
               prevMonthCount={prevMonthOpenedPrs ? prevMonthOpenedPrsMeta.itemCount : undefined}
             />
             <StatsCard
               type="pr"
               status="merged"
+              range={Number(range ?? 30)}
               count={closedPrs.filter((pr) => pr.pr_is_merged === true).length}
               prevMonthCount={prevMonthClosedPrs ? prevMonthClosedPrsMeta.itemCount : undefined}
             />
             <StatsCard
               type="pr"
               status="closed"
+              range={Number(range ?? 30)}
               count={closedPrs.filter((item) => item.pr_state === "close" && !item.pr_is_merged).length}
               prevMonthCount={prevMonthClosedPrsMeta ? prevMonthClosedPrsMeta.itemCount : undefined}
+            />
+          </div>
+          <div className="mt-6">
+            <DateFilter
+              setRangeFilter={(value) => {
+                router.push({
+                  pathname: router.pathname,
+                  query: { ...router.query, range: value },
+                });
+              }}
+              defaultRange={Number(range ?? 30)}
             />
           </div>
 

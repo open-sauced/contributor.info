@@ -12,11 +12,12 @@ type query = {
   startDate?: number;
   status?: "closed" | "open";
   initialData?: PaginatedDataResponse;
+  range?: number;
 };
 
 // We're not currently using this, we're just using useSWR directly inside ChildWithSWR
 // this needs useCallback wrap if we want to use it in the other component
-const useContributorData = ({ repo, startDate, status, limit, initialData }: query) => {
+const useContributorData = ({ repo, startDate, status, limit, initialData, range = 30 }: query) => {
   const query = new URLSearchParams();
 
   if (startDate) {
@@ -26,6 +27,8 @@ const useContributorData = ({ repo, startDate, status, limit, initialData }: que
     query.set("status", `${status}`);
   }
   query.set("repo", `${repo}`);
+
+  query.set("range", `${range}`);
 
   query.set("limit", "100");
 

@@ -1,7 +1,9 @@
 import { ResponsiveLine, Datum } from "@nivo/line";
-import { format, parse } from "date-fns";
+import { useRouter } from "next/router";
 
 const CIResponsiveLine = ({ data }: Datum) => {
+  const router = useRouter();
+  const { range = 30 } = router.query;
   return (
     <>
       <div style={{ height: 400, width: "100%" }}>
@@ -12,6 +14,7 @@ const CIResponsiveLine = ({ data }: Datum) => {
             type: "linear",
             stacked: true,
           }}
+          xScale={{ type: "time", format: "%m/%d/%Y", precision: "day" }}
           motionConfig="stiff"
           curve="basis"
           enableSlices="x"
@@ -27,14 +30,10 @@ const CIResponsiveLine = ({ data }: Datum) => {
             legendOffset: -40,
             legendPosition: "middle",
           }}
+          xFormat="time:%m/%d/%Y"
           axisBottom={{
-            tickSize: 0,
-            tickValues: 7,
-            tickPadding: 5,
-            format: (value) => {
-              const date = parse(value, "MM/dd/yyyy", new Date());
-              return format(date, "MMM d");
-            },
+            format: "%b %d",
+            tickValues: `every ${Number(range) > 7 ? 5 : 1} day`,
           }}
           theme={{
             axis: {},

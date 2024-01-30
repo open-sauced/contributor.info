@@ -1,5 +1,3 @@
-import { format, parse } from "date-fns";
-
 const count = (prData: DBContributorsPR[]): { mergedCount: number; closedCount: number; totalCount: number } => {
   const mergedCount = prData.filter((item) => item.pr_is_merged).length; // Merged PRs
   const closedCount = prData.filter((item) => item.pr_state === "closed").length; // Closed PRs
@@ -22,13 +20,13 @@ const prPerDay = (open: DBContributorsPR[], closed: DBContributorsPR[]) => {
   });
 
   const sortedOpenedPRs = open.sort((a, b) => {
-    const aDate = new Date(a.pr_created_at);
-    const bDate = new Date(b.pr_created_at);
+    const aDate = new Date(a.pr_closed_at);
+    const bDate = new Date(b.pr_closed_at);
 
     return aDate.getTime() - bDate.getTime();
   });
   const mergedPRsPerDay = sortedMergedPRs.reduce<Record<string, number>>((acc, item) => {
-    const mergedDate = format(new Date(item.pr_merged_at), "MM/dd/yyyy");
+    const mergedDate = new Date(item.pr_merged_at).toLocaleDateString();
 
     if (item.pr_is_merged) {
       if (!acc[mergedDate]) {
@@ -41,7 +39,7 @@ const prPerDay = (open: DBContributorsPR[], closed: DBContributorsPR[]) => {
   }, {});
 
   const closedPRsPerDay = sortedMergedPRs.reduce<Record<string, number>>((acc, item) => {
-    const closedDate = format(new Date(item.pr_closed_at), "MM/dd/yyyy");
+    const closedDate = new Date(item.pr_updated_at).toLocaleDateString();
 
     if (item.pr_is_merged === false) {
       if (!acc[closedDate]) {
@@ -54,7 +52,7 @@ const prPerDay = (open: DBContributorsPR[], closed: DBContributorsPR[]) => {
   }, {});
 
   const openedPRsPerDay = sortedOpenedPRs.reduce<Record<string, number>>((acc, item) => {
-    const openedDate = format(new Date(item.pr_created_at), "MM/dd/yyyy");
+    const openedDate = new Date(item.pr_created_at).toLocaleDateString();
 
     if (!acc[openedDate]) {
       acc[openedDate] = 0;
@@ -73,17 +71,17 @@ const prPerDay = (open: DBContributorsPR[], closed: DBContributorsPR[]) => {
     {
       id: "Opened PRs",
       color: "#10b981",
-      data: openedPRs,
+      data: openedPRs.reverse(),
     },
     {
       id: "Merged PRs",
-      color: "#A78BFA",
-      data: mergedPrs,
+      color: "#3b38f1",
+      data: mergedPrs.reverse(),
     },
     {
       id: "Closed PRs",
       color: "#ef4444",
-      data: closedPRs,
+      data: closedPRs.reverse(),
     },
   ];
 };

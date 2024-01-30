@@ -5,7 +5,7 @@
 
 > All notable changes to this project will be documented in this file
 
-## [1.2.0](https://github.com/open-sauced/contributor.info/compare/v1.1.0...v1.2.0) (2024-01-05)
+## [1.2.0-beta.1](https://github.com/open-sauced/contributor.info/compare/v1.1.0...v1.2.0-beta.1) (2024-01-05)
 
 
 ### 🍕 Features

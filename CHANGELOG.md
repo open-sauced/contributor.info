@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+### [1.2.1](https://github.com/open-sauced/contributor.info/compare/v1.2.0...v1.2.1) (2024-01-30)
+
+
+### 🐛 Bug Fixes
+
+* env url ([#31](https://github.com/open-sauced/contributor.info/issues/31)) ([4b4f342](https://github.com/open-sauced/contributor.info/commit/4b4f3421fe181c61d06fd9426d87bcf99c19d66b))
+
 ### [1.2.1-beta.1](https://github.com/open-sauced/contributor.info/compare/v1.2.0...v1.2.1-beta.1) (2024-01-30)
 
 

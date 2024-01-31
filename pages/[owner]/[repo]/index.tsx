@@ -73,12 +73,12 @@ const StatsCard = ({ type, status, count, prevMonthCount }: StatsCardProps) => {
 const DataLabel = ({ label, type }: { label: string; type: "merged" | "closed" | "open" }) => {
   const getColorByType = (type: string) => {
     switch (type) {
-      case "merged":
-        return "bg-violet-400";
-      case "closed":
-        return "bg-red-500";
-      case "open":
-        return "bg-green-500";
+    case "merged":
+      return "bg-violet-400";
+    case "closed":
+      return "bg-red-500";
+    case "open":
+      return "bg-green-500";
     }
   };
 

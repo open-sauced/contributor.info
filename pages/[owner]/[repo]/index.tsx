@@ -51,9 +51,7 @@ const StatsCard = ({ type, status, count, prevMonthCount }: StatsCardProps) => {
       >
         {IconMap[type][status]}
       </div>
-      <div className="capitalize text-gray-500 text-sm">
-        Pull Requests {status === "merged" || status === "closed" ? status : null}
-      </div>
+      <div className="capitalize text-gray-500 text-sm">Pull Requests {status === "closed" ? status : null}</div>
       <div className="flex items-center justify-between">
         <span className="text-3xl font-semibold">{count}</span>
         <div className="flex items-center gap-1">
@@ -75,12 +73,12 @@ const StatsCard = ({ type, status, count, prevMonthCount }: StatsCardProps) => {
 const DataLabel = ({ label, type }: { label: string; type: "merged" | "closed" | "open" }) => {
   const getColorByType = (type: string) => {
     switch (type) {
-    case "merged":
-      return "bg-violet-400";
-    case "closed":
-      return "bg-red-500";
-    case "open":
-      return "bg-green-500";
+      case "merged":
+        return "bg-violet-400";
+      case "closed":
+        return "bg-red-500";
+      case "open":
+        return "bg-green-500";
     }
   };
 

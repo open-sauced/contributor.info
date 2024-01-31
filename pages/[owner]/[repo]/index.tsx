@@ -134,7 +134,6 @@ const OwnerRepo = ({
 
   if (owner && repo) {
     const chartData = prPerDay(openedPrs, closedPrs);
-    console.log(prevMonthOpenedPrsMeta);
 
     return (
       <div className="bg-white">

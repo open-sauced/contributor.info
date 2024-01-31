@@ -10,7 +10,7 @@ type query = {
   repo: string;
   limit?: number;
   startDate?: number;
-  status?: "closed" | "open" | "merged";
+  status?: "closed" | "open";
   initialData?: PaginatedDataResponse;
 };
 

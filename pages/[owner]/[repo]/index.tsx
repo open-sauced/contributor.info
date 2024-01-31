@@ -20,7 +20,7 @@ export interface PaginatedDataResponse {
 interface StatsCardProps {
   type: "issue" | "pr";
   count: number;
-  status: "open" | "closed" | "merged";
+  status: "open" | "closed";
   prevMonthCount?: number;
 }
 

@@ -12,20 +12,7 @@ const count = (prData: DBContributorsPR[]): { mergedCount: number; closedCount: 
 };
 
 const prPerDay = (open: DBContributorsPR[], closed: DBContributorsPR[]) => {
-  const sortedMergedPRs = closed.sort((a, b) => {
-    const aDate = new Date(a.pr_closed_at);
-    const bDate = new Date(b.pr_closed_at);
-
-    return aDate.getTime() - bDate.getTime();
-  });
-
-  const sortedOpenedPRs = open.sort((a, b) => {
-    const aDate = new Date(a.pr_closed_at);
-    const bDate = new Date(b.pr_closed_at);
-
-    return aDate.getTime() - bDate.getTime();
-  });
-  const mergedPRsPerDay = sortedMergedPRs.reduce<Record<string, number>>((acc, item) => {
+  const mergedPRsPerDay = closed.reduce<Record<string, number>>((acc, item) => {
     const mergedDate = new Date(item.pr_merged_at).toLocaleDateString();
 
     if (item.pr_is_merged) {
@@ -38,8 +25,8 @@ const prPerDay = (open: DBContributorsPR[], closed: DBContributorsPR[]) => {
     return acc;
   }, {});
 
-  const closedPRsPerDay = sortedMergedPRs.reduce<Record<string, number>>((acc, item) => {
-    const closedDate = new Date(item.pr_updated_at).toLocaleDateString();
+  const closedPRsPerDay = closed.reduce<Record<string, number>>((acc, item) => {
+    const closedDate = new Date(item.pr_closed_at).toLocaleDateString();
 
     if (item.pr_is_merged === false) {
       if (!acc[closedDate]) {
@@ -51,8 +38,8 @@ const prPerDay = (open: DBContributorsPR[], closed: DBContributorsPR[]) => {
     return acc;
   }, {});
 
-  const openedPRsPerDay = sortedOpenedPRs.reduce<Record<string, number>>((acc, item) => {
-    const openedDate = new Date(item.pr_created_at).toLocaleDateString();
+  const openedPRsPerDay = open.reduce<Record<string, number>>((acc, item) => {
+    const openedDate = new Date(item.pr_updated_at).toLocaleDateString();
 
     if (!acc[openedDate]) {
       acc[openedDate] = 0;

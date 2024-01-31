@@ -10,7 +10,7 @@ type query = {
   repo: string;
   limit?: number;
   startDate?: number;
-  status?: "closed" | "open";
+  status?: "closed" | "open" | "merged";
   initialData?: PaginatedDataResponse;
 };
 
@@ -27,7 +27,7 @@ const useContributorData = ({ repo, startDate, status, limit, initialData }: que
   }
   query.set("repo", `${repo}`);
 
-  query.set("limit", "100");
+  query.set("orderBy", "updated_at");
 
   const baseEndpoint = "prs/search";
 

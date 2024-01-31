@@ -134,7 +134,7 @@ const OwnerRepo = ({
 
   if (owner && repo) {
     const chartData = prPerDay(openedPrs, closedPrs);
-    console.log(chartData);
+    console.log(prevMonthOpenedPrsMeta);
 
     return (
       <div className="bg-white">
@@ -155,7 +155,7 @@ const OwnerRepo = ({
             <StatsCard
               type="pr"
               status="closed"
-              count={closedPrs.filter((item) => item.pr_state === "close" && !item.pr_is_merged).length}
+              count={closedPrs.filter((item) => item.pr_state === "closed" && !item.pr_is_merged).length}
               prevMonthCount={prevMonthClosedPrsMeta ? prevMonthClosedPrsMeta.itemCount : undefined}
             />
           </div>

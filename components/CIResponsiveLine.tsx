@@ -13,7 +13,7 @@ const CIResponsiveLine = ({ data }: Datum) => {
             stacked: true,
           }}
           motionConfig="stiff"
-          curve="basis"
+          curve="linear"
           enableSlices="x"
           axisTop={null}
           isInteractive={true}
@@ -48,10 +48,10 @@ const CIResponsiveLine = ({ data }: Datum) => {
           }}
           pointSize={0}
           pointColor={{ theme: "background" }}
-          enableGridX={false}
+          enableGridX={true}
           enableGridY={false}
           useMesh={true}
-          enableArea={false}
+          enableArea={true}
           enablePointLabel={false}
           colors={(d) => d.color}
         />

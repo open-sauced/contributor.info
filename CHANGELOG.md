@@ -5,6 +5,13 @@
 
 > All notable changes to this project will be documented in this file
 
+## [1.3.0-beta.1](https://github.com/open-sauced/contributor.info/compare/v1.2.1...v1.3.0-beta.1) (2024-02-01)
+
+
+### 🍕 Features
+
+* Clean up charts so it makes sense (sort of) ([#33](https://github.com/open-sauced/contributor.info/issues/33)) ([c16965a](https://github.com/open-sauced/contributor.info/commit/c16965a87aeeb9a5daf87a14f46ab3ad20d70459))
+
 ### [1.2.1](https://github.com/open-sauced/contributor.info/compare/v1.2.0...v1.2.1) (2024-01-30)
 
 

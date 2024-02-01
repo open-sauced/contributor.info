@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import React from "react";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
@@ -20,7 +21,7 @@ export interface PaginatedDataResponse {
 interface StatsCardProps {
   type: "issue" | "pr";
   count: number;
-  status: "open" | "closed" | "merged";
+  status: "open" | "closed";
   prevMonthCount?: number;
 }
 
@@ -51,9 +52,7 @@ const StatsCard = ({ type, status, count, prevMonthCount }: StatsCardProps) => {
       >
         {IconMap[type][status]}
       </div>
-      <div className="capitalize text-gray-500 text-sm">
-        Pull Requests {status === "merged" || status === "closed" ? status : null}
-      </div>
+      <div className="capitalize text-gray-500 text-sm">Pull Requests {status === "closed" ? status : null}</div>
       <div className="flex items-center justify-between">
         <span className="text-3xl font-semibold">{count}</span>
         <div className="flex items-center gap-1">
@@ -75,12 +74,12 @@ const StatsCard = ({ type, status, count, prevMonthCount }: StatsCardProps) => {
 const DataLabel = ({ label, type }: { label: string; type: "merged" | "closed" | "open" }) => {
   const getColorByType = (type: string) => {
     switch (type) {
-    case "merged":
-      return "bg-violet-400";
-    case "closed":
-      return "bg-red-500";
-    case "open":
-      return "bg-green-500";
+      case "merged":
+        return "bg-violet-400";
+      case "closed":
+        return "bg-red-500";
+      case "open":
+        return "bg-green-500";
     }
   };
 
@@ -147,14 +146,14 @@ const OwnerRepo = ({
             />
             <StatsCard
               type="pr"
-              status="merged"
+              status="closed"
               count={closedPrs.filter((pr) => pr.pr_is_merged === true).length}
               prevMonthCount={prevMonthClosedPrs ? prevMonthClosedPrsMeta.itemCount : undefined}
             />
             <StatsCard
               type="pr"
               status="closed"
-              count={closedPrs.filter((item) => item.pr_state === "close" && !item.pr_is_merged).length}
+              count={closedPrs.filter((item) => item.pr_state === "closed" && !item.pr_is_merged).length}
               prevMonthCount={prevMonthClosedPrsMeta ? prevMonthClosedPrsMeta.itemCount : undefined}
             />
           </div>
